@@ -67,6 +67,10 @@ $  npx playwright show-report
 
 ![Folder-Structure](imgs/full_trace.png)
 
+## API test recomendation
+
+- Validate the token per session and verify if the token is validated before and after the page is loaded.
+
 ## FAQ
 
 #### What happens if the test are not running?
