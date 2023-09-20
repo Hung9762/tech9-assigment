@@ -47,6 +47,7 @@ test.describe('Code Assigment', () => {
     await shipping.tapSignIn();
     await shipping.tapReferealContinue();
     await page.waitForLoadState();
+    await shipping.validaSubtotalPrice('66.45');
     await shipping.fillFirstNameAndLastName('Alex', 'Test');
     await shipping.fillAddress('74 E. Richardson Ave.');
     await shipping.fillCity('Orlando');

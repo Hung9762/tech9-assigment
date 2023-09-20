@@ -1,4 +1,4 @@
-import { Locator, Page } from '@playwright/test';
+import { Locator, Page, expect } from '@playwright/test';
 import { BaseUI } from './BaseUI.page';
 
 export class Shipping extends BaseUI {
@@ -16,6 +16,7 @@ export class Shipping extends BaseUI {
   protected verifyAddressSave: Locator;
   protected shippingMethod: Locator;
   protected shippingContinue: Locator;
+  protected subtotal: Locator;
 
   constructor(page: Page) {
     super(page);
@@ -36,6 +37,7 @@ export class Shipping extends BaseUI {
     this.verifyAddressSave = page.getByTestId('qa-suggestion-save');
     this.shippingMethod = page.getByText('Standard $ 13.99 (3-5 business days)');
     this.shippingContinue = page.getByTestId('qa-ship-methods-continue');
+    this.subtotal = page.getByTestId('qa-subtotal-value');
   }
 
   public async fillFirstNameAndLastName(firstName: string, lastName: string) {
@@ -82,5 +84,10 @@ export class Shipping extends BaseUI {
   public async tapShippingMethod() {
     await this.tapElement(this.shippingMethod);
     await this.tapElement(this.shippingContinue);
+  }
+
+  public async validaSubtotalPrice(subtotal: string) {
+    let sub = await this.getElementText(this.subtotal);
+    expect(sub).toContain(subtotal);
   }
 }
